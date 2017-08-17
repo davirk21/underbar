@@ -48,6 +48,8 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
+    /*
+    */
     if(Array.isArray(collection)){
       for(var i = 0; i < collection.length; i++){
         iterator(collection[i], i, collection);
@@ -444,7 +446,16 @@ _.each(arguments, function(argObject) { //argObject = elements in argument
   // The new array should contain all elements of the multidimensional array.
   //
   // Hint: Use Array.isArray to check if something is an array
-  _.flatten = function(nestedArray, result) {
+  _.flatten = function(nestedArray) {
+    var result = [];
+    _.each(nestedArray, function(val){
+      if(Array.isArray(val)){
+        result = result.concat(_.flatten(val));
+      }else{
+        results = result.concat(val);
+      }
+    })
+    return result;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
